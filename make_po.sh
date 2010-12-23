@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Define the languages we'll localize for.
+domain_name="test"  # Should match the "domain" used by the app
 langs="en ja"  # modify as desired
 
 # Force an English LANG setting (to make MinGW's gettext utilities
@@ -12,7 +12,7 @@ find . -iname '*.py' > xgettext_sources.txt
 
 # Extract the strings
 mkdir -p po
-template="po/test.pot"
+template="po/${domain_name}.pot"
 xgettext -L python -f xgettext_sources.txt -o "$template"
 
 # Create/update the localized .po files
