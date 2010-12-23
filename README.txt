@@ -13,31 +13,9 @@ going.
 Procedure
 =========
 
-1. Create a list of all source files::
+Run make_po.sh via a MinGW shell session to create (or update) the .po
+localization files.
 
-     find . -iname '*.py' > xgettext_sources.txt
+Update the files as necessary by hand.
 
-2. Extract the strings::
-
-     mkdir po
-     xgettext -L python -f xgettext_sources.txt -o po/test.pot
-
-3. Create the localized .po files::
-
-     langs="en ja"  # modify as desired
-     for lang in $langs; do
-         # English is forced here since errors seem to occur in
-         # non-english environments...
-         LANG=en msginit -i po/test.pot --locale="$lang" -o "po/${lang}.po"
-     done
-
-4. Edit the files by hand
-
-5. Create the .mo files::
-
-     langs="en ja"  # modify as desired
-     for lang in $langs; do
-         locale_dir="locale/${lang}/LC_MESSAGES"
-         mkdir -pv "${locale_dir}"
-         msgfmt "po/${lang}.po" -o "${locale_dir}/${lang}.mo"
-     done
+Create the .mo files by running compile_mo.sh.
